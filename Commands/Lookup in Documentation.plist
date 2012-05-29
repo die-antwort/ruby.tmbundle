@@ -6,9 +6,8 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env bash
-[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
-
-"${TM_BUNDLE_SUPPORT}/bin/linked_ri.rb"</string>
+open "http://apidock.com/ruby/search/quick?query=$TM_CURRENT_WORD"
+</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>hideFromUser</key>
@@ -18,7 +17,7 @@
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>name</key>
-	<string>Documentation for Word / Selection</string>
+	<string>Help (APIDock Ruby)</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
