@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>content</key>
@@ -9,8 +9,6 @@ ${TM_SELECTED_TEXT/([\t ]*).*/$1/m}rescue ${1:Exception}${2/.+/ =&gt; /}${2:e}
 ${TM_SELECTED_TEXT/([\t ]*).*/$1/m}	$0
 ${TM_SELECTED_TEXT/([\t ]*).*/$1/m}end
 </string>
-	<key>keyEquivalent</key>
-	<string>^W</string>
 	<key>name</key>
 	<string>begin … rescue … end</string>
 	<key>scope</key>
