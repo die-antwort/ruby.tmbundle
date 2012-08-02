@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
@@ -19,12 +19,12 @@ end
 
 print case str = STDIN.read
   # Handle standard quotes
-  when /\A"(.*)"\z/m;          "'"   + $1.unescape('"').escape("'") + "'"
-  when /\A'(.*)'\z/m;          "%Q{" + $1.unescape("'").escape("}") + "}"
-  when /\A%[Qq]?\{(.*)\}\z/m;  '"'   + $1.unescape("}").escape('"') + '"'
+  when /\A"(.*)"\z/m; "'"   + $1.unescape('"').escape("'") + "'"
+  when /\A'(.*)'\z/m; '"'   + $1.unescape("'").escape('"') + '"'
 
   # Handle the more esoteric quote styles
-  when /\A%[Qq]?\[(.*)(\])\z/m,
+  when /\A%[Qq]?\{(.*)\}\z/m,
+       /\A%[Qq]?\[(.*)(\])\z/m,
        /\A%[Qq]?\((.*)(\))\z/m,
        /\A%[Qq]?&lt;(.*)(&gt;)\z/m;  '"' + $1.unescape($2).escape('"') + '"'
   when /\A%[Qq]?(.)(.*)\1\z/m; '"' + $2.unescape($1).escape('"') + '"'
@@ -41,15 +41,23 @@ end
 	<string>scope</string>
 	<key>input</key>
 	<string>selection</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^"</string>
 	<key>name</key>
 	<string>Toggle Quote Style</string>
-	<key>output</key>
-	<string>replaceSelectedText</string>
+	<key>outputCaret</key>
+	<string>heuristic</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>replaceInput</string>
 	<key>scope</key>
 	<string>source.ruby string.quoted.double, source.ruby string.quoted.single, source.ruby string</string>
 	<key>uuid</key>
 	<string>6519CB08-8326-4B77-A251-54722FFBFC1F</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
