@@ -10,14 +10,14 @@ open "http://apidock.com/ruby/search/quick?query=$TM_CURRENT_WORD"
 </string>
 	<key>fallbackInput</key>
 	<string>word</string>
-	<key>hideFromUser</key>
-	<true/>
 	<key>input</key>
 	<string>selection</string>
 	<key>inputFormat</key>
 	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>^H</string>
 	<key>name</key>
-	<string>Help (APIDock Ruby)</string>
+	<string>Documentation for Word (APIDock)</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
@@ -25,7 +25,7 @@ open "http://apidock.com/ruby/search/quick?query=$TM_CURRENT_WORD"
 	<key>outputLocation</key>
 	<string>toolTip</string>
 	<key>scope</key>
-	<string>source.ruby</string>
+	<string>source.ruby &amp; attr.os-version.10.9</string>
 	<key>semanticClass</key>
 	<string>lookup.define.ruby</string>
 	<key>uuid</key>
