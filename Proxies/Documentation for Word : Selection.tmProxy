@@ -5,9 +5,9 @@
 	<key>content</key>
 	<string>lookup.define.ruby</string>
 	<key>keyEquivalent</key>
-	<string>^h</string>
+	<string>^H</string>
 	<key>name</key>
-	<string>Documentation for Word / Selection</string>
+	<string>Documentation for Word (ri)</string>
 	<key>scope</key>
 	<string>source.ruby</string>
 	<key>uuid</key>
