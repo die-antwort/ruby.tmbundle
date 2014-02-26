@@ -19,7 +19,7 @@ export TM_RUBY=$(which "${TM_RUBY:-ruby}")
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>^E</string>
+	<string>^@e</string>
 	<key>name</key>
 	<string>Execute Line / Selection as Ruby</string>
 	<key>outputCaret</key>
