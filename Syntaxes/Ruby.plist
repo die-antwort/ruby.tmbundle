@@ -7,7 +7,7 @@
 	TODO: unresolved issues
 
 	text:
-	"p &lt;&lt; end
+	"p &lt;&lt;end
 	print me!
 	end"
 	symptoms:
@@ -27,13 +27,6 @@
 	symtoms:
 	From Programming Ruby p306; should be a non-interpolated heredoc.
 	
-	text:
-	"a\332a"
-	symptoms:
-	'\332' is not recognized as slash3.. which should be octal 332.
-	solution:
-	plain regexp.. should be easy.
-
     text:
     val?(a):p(b)
     val?'a':'b'
@@ -259,7 +252,7 @@
 			<key>comment</key>
 			<string> everything being a method but having a special function is a..</string>
 			<key>match</key>
-			<string>\b(initialize|new|loop|include|extend|prepend|raise|attr_reader|attr_writer|attr_accessor|attr|catch|throw|private|module_function|public|protected)\b(?![?!])</string>
+			<string>\b(initialize|new|loop|include|extend|prepend|fail|raise|attr_reader|attr_writer|attr_accessor|attr|catch|throw|private|module_function|public|protected)\b(?![?!])</string>
 			<key>name</key>
 			<string>keyword.other.special-method.ruby</string>
 		</dict>
