@@ -6,18 +6,19 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env bash
-open "http://apidock.com/ruby/search/quick?query=$TM_CURRENT_WORD"
-</string>
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
+"${TM_BUNDLE_SUPPORT}/bin/linked_ri.rb"</string>
 	<key>fallbackInput</key>
 	<string>word</string>
+	<key>hideFromUser</key>
+	<true/>
 	<key>input</key>
 	<string>selection</string>
 	<key>inputFormat</key>
 	<string>text</string>
-	<key>keyEquivalent</key>
-	<string>^H</string>
 	<key>name</key>
-	<string>Documentation for Word (APIDock)</string>
+	<string>Documentation for Word / Selection</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
@@ -25,7 +26,7 @@ open "http://apidock.com/ruby/search/quick?query=$TM_CURRENT_WORD"
 	<key>outputLocation</key>
 	<string>toolTip</string>
 	<key>scope</key>
-	<string>source.ruby &amp; attr.os-version.10.9</string>
+	<string>source.ruby &amp; attr.os-version.10.6, source.ruby &amp; attr.os-version.10.7, source.ruby &amp; attr.os-version.10.8</string>
 	<key>semanticClass</key>
 	<string>lookup.define.ruby</string>
 	<key>uuid</key>
