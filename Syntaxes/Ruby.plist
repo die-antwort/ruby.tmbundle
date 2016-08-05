@@ -215,7 +215,7 @@
 			<key>comment</key>
 			<string>contextual smart pair support for block parameters</string>
 			<key>match</key>
-			<string>(?&lt;!\.)\bdo\b\s*</string>
+			<string>(?&lt;!\.)\bdo\b</string>
 			<key>name</key>
 			<string>keyword.control.start-block.ruby</string>
 		</dict>
@@ -228,16 +228,6 @@
 			<string>meta.syntax.ruby.start-block</string>
 		</dict>
 		<dict>
-			<key>comment</key>
-			<string> as above, just doesn't need a 'end' and does a logic operation</string>
-			<key>match</key>
-			<string>(?&lt;!\.)\b(and|not|or)\b</string>
-			<key>name</key>
-			<string>keyword.operator.logical.ruby</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string> just as above but being not a logical operation</string>
 			<key>match</key>
 			<string>(?&lt;!\.)\b(alias|alias_method|block_given[?]|break|defined[?]|iterator[?]|next|redo|retry|return|super|undef|yield)(\b|(?&lt;=[?]))(?![?!])</string>
 			<key>name</key>
@@ -437,7 +427,7 @@
 					<key>begin</key>
 					<string>(?=[&amp;*_a-zA-Z])</string>
 					<key>end</key>
-					<string>(?=\,|\)\s*$)</string>
+					<string>(?=,|\)\s*$)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1562,7 +1552,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?&gt;\=\s*&lt;&lt;(\w+))</string>
+			<string>(?&gt;=\s*&lt;&lt;(\w+))</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -1687,7 +1677,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>&lt;&lt;=|%=|&amp;{1,2}=|\*=|\*\*=|\+=|\-=|\^=|\|{1,2}=|&lt;&lt;</string>
+			<string>&lt;&lt;=|%=|&amp;{1,2}=|\*=|\*\*=|\+=|-=|\^=|\|{1,2}=|&lt;&lt;</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.augmented.ruby</string>
 		</dict>
@@ -1699,7 +1689,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[ \t])!+|\bnot\b|&amp;&amp;|\band\b|\|\||\bor\b|\^</string>
+			<string>(?&lt;!\.)\b(and|not|or)\b(?![?!])</string>
+			<key>name</key>
+			<string>keyword.operator.logical.ruby</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Make sure this goes after assignment and comparison</string>
+			<key>match</key>
+			<string>(?&lt;=^|[ \t])!|&amp;&amp;|\|\||\^</string>
 			<key>name</key>
 			<string>keyword.operator.logical.ruby</string>
 		</dict>
@@ -1719,7 +1717,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(%|&amp;|\*\*|\*|\+|\-|/)</string>
+			<string>(%|&amp;|\*\*|\*|\+|-|/)</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.ruby</string>
 		</dict>
@@ -1737,7 +1735,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\;</string>
+			<string>;</string>
 			<key>name</key>
 			<string>punctuation.separator.statement.ruby</string>
 		</dict>
@@ -1977,7 +1975,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2285,7 +2283,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2542,7 +2540,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2714,7 +2712,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>%Q?(?:([(\[{&lt;])|([^\w\s]|_))</string>
+					<string>%Q?(?:([(\[{&lt;])|([^\w\s=]|_))</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2724,7 +2722,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2922,7 +2920,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>([)\]}&gt;]|\1\2)[eimnosux]*</string>
+					<string>([)\]}&gt;]\2|\1\2)[eimnosux]*</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3100,7 +3098,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3282,7 +3280,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3590,7 +3588,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3847,7 +3845,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
