@@ -26,15 +26,21 @@ end
 </string>
 	<key>input</key>
 	<string>document</string>
-	<key>keyEquivalent</key>
-	<string>^V</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>name</key>
 	<string>Validate Syntax</string>
-	<key>output</key>
-	<string>showAsTooltip</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>toolTip</string>
 	<key>scope</key>
 	<string>source.ruby</string>
 	<key>uuid</key>
 	<string>EE5F19BA-6C02-11D9-92BA-0011242E4184</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
