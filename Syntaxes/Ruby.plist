@@ -52,7 +52,6 @@
 		<string>ru</string>
 		<string>prawn</string>
 		<string>Cheffile</string>
-		<string>Gemfile</string>
 		<string>Guardfile</string>
 		<string>Hobofile</string>
 		<string>Vagrantfile</string>
@@ -66,9 +65,38 @@
 		<string>arb</string>
 		<string>Dangerfile</string>
 		<string>Brewfile</string>
+		<string>Fastfile</string>
+		<string>Appfile</string>
+		<string>Deliverfile</string>
+		<string>Matchfile</string>
+		<string>Scanfile</string>
+		<string>Snapfile</string>
+		<string>Gymfile</string>
+		<string>jb</string>
 	</array>
 	<key>firstLineMatch</key>
-	<string>^#!/.*\bruby|^#\s+-\*-\s*ruby\s*-\*-</string>
+	<string>(?x)
+# Hashbang
+^\#!.*(?:\s|\/)
+(?:ruby[\.\d]*|macruby|rake|jruby|rbx|ruby_executable_hooks)
+(?:$|\s)
+|
+# Modeline
+(?i:
+    # Emacs
+    -\*-(?:\s*(?=[^:;\s]+\s*-\*-)|(?:.*?[;\s]|(?&lt;=-\*-))mode\s*:\s*)
+    ruby
+    (?=[\s;]|(?&lt;![-*])-\*-).*?-\*-
+  |
+    # Vim
+    (?:(?:\s|^)vi(?:m[&lt;=&gt;]?\d+|m)?|\sex)
+    (?=:(?=\s*set?\s[^\n:]+:)|:(?!\s*set?\s))
+    (?:(?:\s|\s*:\s*)\w*(?:\s*=(?:[^\n\\\s]|\\.)*)?)*
+    [\s:]
+    (?:filetype|ft|syntax)\s*=
+    ruby
+    (?=\s|:|$)
+)</string>
 	<key>keyEquivalent</key>
 	<string>^~R</string>
 	<key>name</key>
@@ -215,7 +243,7 @@
 			<key>comment</key>
 			<string>contextual smart pair support for block parameters</string>
 			<key>match</key>
-			<string>(?&lt;!\.)\bdo\b\s*</string>
+			<string>(?&lt;!\.)\bdo\b</string>
 			<key>name</key>
 			<string>keyword.control.start-block.ruby</string>
 		</dict>
@@ -228,16 +256,6 @@
 			<string>meta.syntax.ruby.start-block</string>
 		</dict>
 		<dict>
-			<key>comment</key>
-			<string> as above, just doesn't need a 'end' and does a logic operation</string>
-			<key>match</key>
-			<string>(?&lt;!\.)\b(and|not|or)\b</string>
-			<key>name</key>
-			<string>keyword.operator.logical.ruby</string>
-		</dict>
-		<dict>
-			<key>comment</key>
-			<string> just as above but being not a logical operation</string>
 			<key>match</key>
 			<string>(?&lt;!\.)\b(alias|alias_method|block_given[?]|break|defined[?]|iterator[?]|next|redo|retry|return|super|undef|yield)(\b|(?&lt;=[?]))(?![?!])</string>
 			<key>name</key>
@@ -271,7 +289,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(?&lt;!\.|::)(require|require_relative|gem)\b</string>
+			<string>\b(?&lt;!\.|::)(require|require_relative)\b</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -385,7 +403,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b[A-Z]\w*\b</string>
+			<string>\b[_A-Z]\w*\b</string>
 			<key>name</key>
 			<string>variable.other.constant.ruby</string>
 		</dict>
@@ -437,7 +455,7 @@
 					<key>begin</key>
 					<string>(?=[&amp;*_a-zA-Z])</string>
 					<key>end</key>
-					<string>(?=\,|\)\s*$)</string>
+					<string>(?=[,)])</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -466,6 +484,29 @@
 							</dict>
 							<key>match</key>
 							<string>\G([&amp;*]?)(?:([_a-zA-Z]\w*(:))|([_a-zA-Z]\w*))</string>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>\(</string>
+							<key>captures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.function.ruby</string>
+								</dict>
+							</dict>
+							<key>comment</key>
+							<string>Prevent end pattern of parent rule from ending prematurely.</string>
+							<key>end</key>
+							<string>\)</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>$self</string>
+								</dict>
+							</array>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1040,6 +1081,64 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>(?=(?&gt;&lt;&lt;[-~]("?)((?:[_\w]+_|)XML)\b\1))</string>
+			<key>comment</key>
+			<string>Heredoc with embedded xml</string>
+			<key>end</key>
+			<string>(?!\G)</string>
+			<key>name</key>
+			<string>meta.embedded.block.xml</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?&gt;&lt;&lt;[-~]("?)((?:[_\w]+_|)XML)\b\1)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.ruby</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>text.xml</string>
+					<key>end</key>
+					<string>\s*\2$\n?</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.ruby</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>string.unquoted.heredoc.ruby</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#heredoc</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#interpolated_ruby</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>text.xml</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#escaped_char</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(?=(?&gt;&lt;&lt;[-~]("?)((?:[_\w]+_|)SQL)\b\1))</string>
 			<key>comment</key>
 			<string>Heredoc with embedded sql</string>
@@ -1562,7 +1661,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?&gt;\=\s*&lt;&lt;(\w+))</string>
+			<string>(?&gt;=\s*&lt;&lt;(\w+))</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -1687,7 +1786,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>&lt;&lt;=|%=|&amp;{1,2}=|\*=|\*\*=|\+=|\-=|\^=|\|{1,2}=|&lt;&lt;</string>
+			<string>&lt;&lt;=|%=|&amp;{1,2}=|\*=|\*\*=|\+=|-=|\^=|\|{1,2}=|&lt;&lt;</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.augmented.ruby</string>
 		</dict>
@@ -1699,7 +1798,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[ \t])!+|\bnot\b|&amp;&amp;|\band\b|\|\||\bor\b|\^</string>
+			<string>(?&lt;!\.)\b(and|not|or)\b(?![?!])</string>
+			<key>name</key>
+			<string>keyword.operator.logical.ruby</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Make sure this goes after assignment and comparison</string>
+			<key>match</key>
+			<string>(?&lt;=^|[ \t])!|&amp;&amp;|\|\||\^</string>
 			<key>name</key>
 			<string>keyword.operator.logical.ruby</string>
 		</dict>
@@ -1719,7 +1826,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(%|&amp;|\*\*|\*|\+|\-|/)</string>
+			<string>(%|&amp;|\*\*|\*|\+|-|/)</string>
 			<key>name</key>
 			<string>keyword.operator.arithmetic.ruby</string>
 		</dict>
@@ -1737,7 +1844,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\;</string>
+			<string>;</string>
 			<key>name</key>
 			<string>punctuation.separator.statement.ruby</string>
 		</dict>
@@ -1977,7 +2084,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2285,7 +2392,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2542,7 +2649,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2714,7 +2821,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>%Q?(?:([(\[{&lt;])|([^\w\s]|_))</string>
+					<string>%Q?(?:([(\[{&lt;])|([^\w\s=]|_))</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2724,7 +2831,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -2922,7 +3029,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>([)\]}&gt;]|\1\2)[eimnosux]*</string>
+					<string>([)\]}&gt;]\2|\1\2)[eimnosux]*</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3100,7 +3207,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3282,7 +3389,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3590,7 +3697,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
@@ -3847,7 +3954,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>[)\]}&gt;]|\1\2</string>
+					<string>[)\]}&gt;]\2|\1\2</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>0</key>
