@@ -41,8 +41,6 @@ end
 	<string>selection</string>
 	<key>inputFormat</key>
 	<string>text</string>
-	<key>keyEquivalent</key>
-	<string>$</string>
 	<key>name</key>
 	<string>New Method</string>
 	<key>outputCaret</key>
