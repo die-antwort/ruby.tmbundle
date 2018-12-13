@@ -4,6 +4,8 @@
 <dict>
 	<key>content</key>
 	<string>inspect</string>
+	<key>isDisabled</key>
+	<true/>
 	<key>name</key>
 	<string>#inspect</string>
 	<key>scope</key>
