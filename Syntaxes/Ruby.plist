@@ -73,6 +73,7 @@
 		<string>Snapfile</string>
 		<string>Gymfile</string>
 		<string>jb</string>
+		<string>Podfile</string>
 	</array>
 	<key>firstLineMatch</key>
 	<string>(?x)
@@ -269,9 +270,45 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(__(FILE|LINE)__)\b(?![?!])</string>
+			<string>\b(__(dir|FILE|LINE)__)\b(?![?!])</string>
 			<key>name</key>
 			<string>variable.language.ruby</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^__END__\n</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.program-block.ruby</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>__END__ marker</string>
+			<key>contentName</key>
+			<string>text.plain</string>
+			<key>end</key>
+			<string>(?=not)impossible</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?=&lt;?xml|&lt;(?i:html\b)|!DOCTYPE (?i:html\b))</string>
+					<key>end</key>
+					<string>(?=not)impossible</string>
+					<key>name</key>
+					<string>text.html.embedded.ruby</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -1048,42 +1085,6 @@
 			<string>(?&lt;!\w)\?(\\(x\h{1,2}(?!\h)\b|0[0-7]{0,2}(?![0-7])\b|[^x0MC])|(\\[MC]-)+\w|[^\s\\])</string>
 			<key>name</key>
 			<string>constant.numeric.ruby</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>^__END__\n</string>
-			<key>captures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>string.unquoted.program-block.ruby</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>__END__ marker</string>
-			<key>contentName</key>
-			<string>text.plain</string>
-			<key>end</key>
-			<string>(?=not)impossible</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?=&lt;?xml|&lt;(?i:html\b)|!DOCTYPE (?i:html\b))</string>
-					<key>end</key>
-					<string>(?=not)impossible</string>
-					<key>name</key>
-					<string>text.html.embedded.ruby</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>text.html.basic</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
